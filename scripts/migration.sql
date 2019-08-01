@@ -1,6 +1,3 @@
-DROP TABLE IF EXISTS TESTKARIM;
-CREATE TABLE TESTKARIM( name VARCHAR(100));
-
 CREATE OR REPLACE FUNCTION migrate_claim_reference_number(src_db_name TEXT, src_port BIGINT, src_host TEXT, src_user TEXT, src_passwd TEXT)
     RETURNS void AS $$
 DECLARE
@@ -12,7 +9,7 @@ DECLARE
                          || ' user=' || $4
                          || ' password='|| $5;
 BEGIN
-
+    RAISE INFO 'migrate_claim_reference_number -- START';
     CREATE EXTENSION IF NOT EXISTS dblink;
     RAISE INFO 'conn_str %', conn_str;
 
@@ -30,5 +27,7 @@ BEGIN
 
     EXECUTE 'SELECT setval(' || quote_literal('claim_reference_number_seq') || ',' || v_last_used_val || ')';
     EXECUTE 'DROP VIEW IF EXISTS db9_seq_lastval';
+
+    RAISE INFO 'migrate_claim_reference_number -- COMPLETE';
 END
 $$ LANGUAGE plpgsql;

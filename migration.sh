@@ -38,7 +38,7 @@ echo "* SRC_PASSWORD: $SRC_PASSWORD"
 echo
 
 SQL_FUNCTION='select migrate_claim_reference_number('\'$SRC_DB\'', '$SRC_PORT', '\'$SRC_HOST\'','\'$SRC_USER\'','\'$SRC_PASSWORD\'')'
-echo "* Query to Execute function: $SQL_FUNCTION"
+echo "* Query to Execute function: ${SQL_FUNCTION}"
 
 METRICS=$(psql \
     -X \
@@ -48,7 +48,7 @@ METRICS=$(psql \
     -U $USER \
     -d $DB \
     -f $SQL \
-    -c ${SQL_FUNCTION} \
+    -c "${SQL_FUNCTION}" \
     --set ON_ERROR_ROLLBACK=on \
     --set ON_ERROR_STOP=off
     )
