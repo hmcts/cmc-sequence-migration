@@ -11,6 +11,9 @@ properties([
 ])
 
 def secretId = "cmc-" + params.ENVIRONMENT
+def product = "cmc"
+def component = "claim-store"
+
 def secrets = [
         (secretId): [
                 secret('claim-store-db-password', 'CLAIM_STORE_DB_PASSWORD'),
