@@ -6,7 +6,7 @@ properties([
         parameters([
                 choice(name: 'ENVIRONMENT', choices: 'sandbox\npreview\ndemo\nithc\naat\nprod', description: 'Environment where migration should be run'),
                 choice(name: 'SUBSCRIPTION', choices: 'sandbox\nnonprod\nprod', description: 'Azure subscriptions available to build in'),
-                string(name: 'MIGRATION_SCRIPT_FILENAME', defaultValue: 'migration.sql', description: 'Name of migration script to execute')
+                string(name: 'MIGRATION_SCRIPT_FILENAME', defaultValue: 'claim-migration.sql', description: 'Name of migration script to execute')
         ])
 ])
 
