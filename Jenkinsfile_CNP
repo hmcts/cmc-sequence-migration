@@ -35,7 +35,7 @@ try {
         def config = new AppPipelineConfig()
         config.vaultSecrets = secrets
 
-        def subscription = ("${params.ENVIRONMENT}".equals('prod')) ? 'prod' : 'nonprod'
+        def subscription = "${params.SUBSCRIPTION}"
 
         stage('Checkout') {
             deleteDir()
