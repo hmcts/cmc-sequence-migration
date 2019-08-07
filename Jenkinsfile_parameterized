@@ -4,8 +4,8 @@ import uk.gov.hmcts.contino.AppPipelineConfig
 
 properties([
         parameters([
-                choice(name: 'ENVIRONMENT', choices: 'sandbox\npreview\ndemo\nithc\naat\nprod', description: 'Environment where migration should be run'),
-                choice(name: 'SUBSCRIPTION', choices: 'sandbox\nnonprod\nprod', description: 'Azure subscriptions available to build in'),
+                choice(name: 'ENVIRONMENT', choices: 'sandbox', description: 'Environment where migration should be run'),
+                choice(name: 'SUBSCRIPTION', choices: 'sandbox', description: 'Azure subscriptions available to build in'),
                 choice(name: 'MIGRATION_SCRIPT_FILENAME', choices: 'claim-migration.sql\nlegal-rep-migration.sql', description: 'Name of migration script to execute')
         ])
 ])
@@ -16,7 +16,6 @@ def component = "claim-store"
 
 def secrets = [
         (secretId): [
-                secret('claim-store-db-password', 'CLAIM_STORE_DB_PASSWORD'),
                 secret('cmc-db-password', 'CMC_DB_PASSWORD')
         ]
 ]
@@ -42,36 +41,14 @@ try {
             checkout scm
         }
 
-        if (params.ENVIRONMENT == 'sandbox') {
-            env.CLAIM_STORE_DB_HOST = 'test-data-lb.moneyclaim.reform.hmcts.net'
-            env.CMC_DB_HOST = 'cmc-sandbox.postgres.database.azure.com'
-            env.CMC_DB_USERNAME = 'cmc@cmc-sandbox'
-
-        } else if (params.ENVIRONMENT == 'aat') {
-            env.CLAIM_STORE_DB_HOST = 'preprod-data-lb.moneyclaim.reform.hmcts.net'
-            env.CMC_DB_HOST = 'cmc-aat.postgres.database.azure.com'
-            env.CMC_DB_USERNAME = 'cmc@cmc-aat'
-
-        } else if (params.ENVIRONMENT == 'preview') {
-            env.CLAIM_STORE_DB_HOST = 'preprod-data-lb.moneyclaim.reform.hmcts.net'
-            env.CMC_DB_HOST = ''
-            env.CMC_DB_USERNAME = 'cmc@cmc-preview'
-
-        } else if (params.ENVIRONMENT == 'demo') {
-            env.CLAIM_STORE_DB_HOST = 'preprod-data-lb.moneyclaim.reform.hmcts.net'
-            env.CMC_DB_HOST = 'cmc-demo.postgres.database.azure.com'
-            env.CMC_DB_USERNAME = 'cmc@cmc-demo'
-
-        } else {
-            env.CLAIM_STORE_DB_HOST = 'prod-data-lb.moneyclaim.reform.hmcts.net'
-            env.CMC_DB_HOST = ''
-            env.CMC_DB_USERNAME = ''
-        }
-
+        env.CLAIM_STORE_DB_HOST = 'pettyfrance.postgres.database.azure.com'
         env.CLAIM_STORE_DB_PORT = '5432'
         env.CLAIM_STORE_DB_NAME = 'claimstore'
-        env.CLAIM_STORE_DB_USERNAME = 'claimstore'
+        env.CLAIM_STORE_DB_USERNAME = 'petadmin@pettyfrance'
+        env.CLAIM_STORE_DB_PASSWORD = 'L%3_??MAN3p00l'
 
+        env.CMC_DB_HOST = 'cmc-sandbox.postgres.database.azure.com'
+        env.CMC_DB_USERNAME = 'cmc@cmc-sandbox'
         env.CMC_DB_PORT = '5432'
         env.CMC_DB_NAME = 'cmc'
 

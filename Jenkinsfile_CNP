@@ -4,9 +4,9 @@ import uk.gov.hmcts.contino.AppPipelineConfig
 
 properties([
         parameters([
-                choice(name: 'ENVIRONMENT', choices: 'sandbox\npreview\ndemo\nithc\naat\nprod', description: 'Environment where migration should be run'),
-                choice(name: 'SUBSCRIPTION', choices: 'sandbox\nnonprod\nprod', description: 'Azure subscriptions available to build in'),
-                string(name: 'MIGRATION_SCRIPT_FILENAME', defaultValue: 'claim-migration.sql', description: 'Name of migration script to execute')
+                choice(name: 'ENVIRONMENT', choices: 'preview\ndemo\nithc\naat\nprod', description: 'Environment where migration should be run'),
+                choice(name: 'SUBSCRIPTION', choices: 'nonprod\nprod', description: 'Azure subscriptions available to build in'),
+                choice(name: 'MIGRATION_SCRIPT_FILENAME', choices: 'claim-migration.sql\nlegal-rep-migration.sql', description: 'Name of migration script to execute')
         ])
 ])
 
@@ -42,12 +42,7 @@ try {
             checkout scm
         }
 
-        if (params.ENVIRONMENT == 'sandbox') {
-            env.CLAIM_STORE_DB_HOST = 'test-data-lb.moneyclaim.reform.hmcts.net'
-            env.CMC_DB_HOST = 'cmc-sandbox.postgres.database.azure.com'
-            env.CMC_DB_USERNAME = 'cmc@cmc-sandbox'
-
-        } else if (params.ENVIRONMENT == 'aat') {
+        if (params.ENVIRONMENT == 'aat') {
             env.CLAIM_STORE_DB_HOST = 'preprod-data-lb.moneyclaim.reform.hmcts.net'
             env.CMC_DB_HOST = 'cmc-aat.postgres.database.azure.com'
             env.CMC_DB_USERNAME = 'cmc@cmc-aat'
