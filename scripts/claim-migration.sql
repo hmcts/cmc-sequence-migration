@@ -7,7 +7,8 @@ DECLARE
                          || ' port=' || $2
                          || ' host=' || $3
                          || ' user=' || $4
-                         || ' password='|| $5;
+                         || ' password='|| $5
+                         || ' sslmode=require';
 BEGIN
     RAISE INFO 'migrate_claim_reference_number -- START';
     CREATE EXTENSION IF NOT EXISTS dblink;
