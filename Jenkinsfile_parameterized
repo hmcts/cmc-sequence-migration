@@ -16,7 +16,7 @@ def component = "claim-store"
 
 def secrets = [
         (secretId): [
-                secret('claim-store-db-password', 'CLAIM_STORE_DB_PASSWORD'),
+                //secret('claim-store-db-password', 'CLAIM_STORE_DB_PASSWORD'),
                 secret('cmc-db-password', 'CMC_DB_PASSWORD')
         ]
 ]
