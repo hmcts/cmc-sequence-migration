@@ -19,12 +19,14 @@ HOST="$1"
 PORT="$2"
 DB="$3"
 USER="$4"
-SQL="scripts/$5"
+SQL_FILE="scripts/$5"
 SRC_DB="$6"
 SRC_PORT="$7"
 SRC_HOST="$8"
 SRC_USER="$9"
 SRC_PASSWORD="${10}"
+
+LEGAL_MIGRATION_FILE="scripts/legal-rep-migration.sql"
 
 echo "* DB hostname: $HOST"
 echo "* DB port: $PORT"
@@ -38,6 +40,12 @@ echo "* SRC_PASSWORD: $SRC_PASSWORD"
 echo
 
 SQL_FUNCTION='select migrate_claim_reference_number('\'$SRC_DB\'', '$SRC_PORT', '\'$SRC_HOST\'','\'$SRC_USER\'','\'$SRC_PASSWORD\'')'
+LEGAL_SQL_FUNCTION='select migrate_legal_reference_number('\'$SRC_DB\'', '$SRC_PORT', '\'$SRC_HOST\'','\'$SRC_USER\'','\'$SRC_PASSWORD\'')'
+
+if [ "$SQL_FILE" == "$LEGAL_MIGRATION_FILE" ]; then
+    SQL_FUNCTION=$LEGAL_SQL_FUNCTION
+fi
+
 echo "* Query to Execute function: ${SQL_FUNCTION}"
 
 METRICS=$(psql \
@@ -47,7 +55,7 @@ METRICS=$(psql \
     -p $PORT \
     -U $USER \
     -d $DB \
-    -f $SQL \
+    -f $SQL_FILE \
     -c "${SQL_FUNCTION}" \
     --set ON_ERROR_ROLLBACK=on \
     --set ON_ERROR_STOP=off

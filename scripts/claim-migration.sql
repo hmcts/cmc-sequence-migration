@@ -13,7 +13,7 @@ BEGIN
     CREATE EXTENSION IF NOT EXISTS dblink;
     RAISE INFO 'conn_str %', conn_str;
 
-    v_sql := 'CREATE OR REPLACE VIEW db9_seq_lastval AS '
+    v_sql := 'CREATE OR REPLACE VIEW db9_claim_seq_lastval AS '
                  || 'SELECT * FROM dblink '
                  || '( '
                  || quote_literal(conn_str)
@@ -23,10 +23,10 @@ BEGIN
         || 'AS t1(last_value text)';
 
     EXECUTE v_sql;
-    EXECUTE 'SELECT last_value FROM db9_seq_lastval' INTO v_last_used_val;
+    EXECUTE 'SELECT last_value FROM db9_claim_seq_lastval' INTO v_last_used_val;
 
     EXECUTE 'SELECT setval(' || quote_literal('claim_reference_number_seq') || ',' || v_last_used_val || ')';
-    EXECUTE 'DROP VIEW IF EXISTS db9_seq_lastval';
+    EXECUTE 'DROP VIEW IF EXISTS db9_claim_seq_lastval';
 
     RAISE INFO 'migrate_claim_reference_number -- COMPLETE';
 END
