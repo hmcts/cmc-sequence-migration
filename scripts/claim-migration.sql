@@ -5,7 +5,7 @@ DECLARE
     v_sql    TEXT;
     conn_str TEXT := 'dbname='|| $1
                          || ' port=' || $2
-                         || ' host=' || $3
+                         || ' hostaddr=' || $3
                          || ' user=' || $4
                          || ' password='|| $5
                          || ' sslmode=require';

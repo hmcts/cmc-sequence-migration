@@ -43,7 +43,7 @@ try {
         }
 
         if (params.ENVIRONMENT == 'sandbox') {
-            env.CLAIM_STORE_DB_HOST = 'pettyfrance.postgres.database.azure.com'
+            env.CLAIM_STORE_DB_HOST = '51.140.184.11'
             env.CLAIM_STORE_DB_USERNAME = 'petadmin@pettyfrance'
             env.CLAIM_STORE_DB_PASSWORD = 'L%3_??MAN3p00l'
 
