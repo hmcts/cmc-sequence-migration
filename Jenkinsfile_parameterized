@@ -4,8 +4,8 @@ import uk.gov.hmcts.contino.AppPipelineConfig
 
 properties([
         parameters([
-                choice(name: 'ENVIRONMENT', choices: 'sandbox\npreview\ndemo\nithc\naat\nprod', description: 'Environment where migration should be run'),
-                choice(name: 'SUBSCRIPTION', choices: 'sandbox\nnonprod\nprod', description: 'Azure subscriptions available to build in'),
+                choice(name: 'ENVIRONMENT', choices: 'sandbox', description: 'Environment where migration should be run'),
+                choice(name: 'SUBSCRIPTION', choices: 'sandbox', description: 'Azure subscriptions available to build in'),
                 choice(name: 'MIGRATION_SCRIPT_FILENAME', choices: 'claim-migration.sql\nlegal-rep-migration.sql', description: 'Name of migration script to execute')
         ])
 ])
