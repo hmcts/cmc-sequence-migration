@@ -8,7 +8,7 @@ DECLARE
                          || ' hostaddr=' || $3
                          || ' user=' || $4
                          || ' password='|| $5
-                         || ' sslmode=require';
+                         || ' sslmode=verify-full';
 BEGIN
     RAISE INFO 'migrate_legal_reference_number -- START';
     CREATE EXTENSION IF NOT EXISTS dblink;
