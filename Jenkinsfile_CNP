@@ -93,8 +93,8 @@ try {
                 withTeamSecrets(config, params.ENVIRONMENT) {
                         sh "chmod +x ${WORKSPACE}/migration.sh"
                         sh "${WORKSPACE}/migration.sh \
-                        "51.140.184.11" \
-                        "5432"
+                        '51.140.184.11' \
+                        '5432'
                         "
                }
            }
