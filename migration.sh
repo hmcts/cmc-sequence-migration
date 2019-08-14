@@ -8,7 +8,7 @@ echo
 
 if [ "$#" -ne 11 ]; then
     echo "* Illegal number of arguments."
-    echo "* Usage: $0 [old_host] [old_port] [old_username] [old_password] [old_db] [referenceType] [new_host] [new_port] [new_username] [new_password] [new_db]   "
+    echo "* Usage: $0 [old_host] [old_port] [old_username] [old_password] [old_db] [referenceType] [new_host] [new_port] [new_username] [new_password] [new_db]"
     echo
     echo "* Exiting"
     echo
