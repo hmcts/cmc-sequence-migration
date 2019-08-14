@@ -88,9 +88,9 @@ try {
         env.CMC_DB_NAME = 'cmc'
 
         // run migration scripts in postgres container
-        // stage('Run migration scripts') {
-        //    withSubscription(subscription) {
-        //        withTeamSecrets(config, params.ENVIRONMENT) {
+        stage('Run migration scripts') {
+            withSubscription(subscription) {
+                withTeamSecrets(config, params.ENVIRONMENT) {
         //                sh "chmod +x migration.sh"
         //                sh "migration.sh \
         //                ${CLAIM_STORE_DB_HOST} \
@@ -104,9 +104,9 @@ try {
         //                ${CMC_DB_USERNAME} \
         //                ${CMC_DB_PASSWORD} \
         //                ${CMC_DB_NAME}"
-        //        }
-        //   }
-        // }
+               }
+           }
+        }
 
         stage('Clean up') {
             deleteDir()
