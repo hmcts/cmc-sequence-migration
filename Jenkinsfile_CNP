@@ -92,7 +92,8 @@ try {
             withSubscription(subscription) {
                 withTeamSecrets(config, params.ENVIRONMENT) {
                       sh 'chmod +x ${WORKSPACE}/migration.sh'
-                      sh '${WORKSPACE}/migration.sh'
+                      sh '${WORKSPACE}/migration.sh \
+                          ${CLAIM_STORE_DB_HOST}'
                }
            }
         }
