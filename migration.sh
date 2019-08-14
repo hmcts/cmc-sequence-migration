@@ -1,5 +1,6 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
-echo " Migration"
+echo "blabla"
+
 
 
