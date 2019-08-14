@@ -91,6 +91,7 @@ try {
 
         // run migration scripts in postgres container
         stage('Run migration scripts') {
+        echo ${referenceNumberType}
             withSubscription(subscription) {
                 withTeamSecrets(config, params.ENVIRONMENT) {
                       sh 'chmod +x ${WORKSPACE}/migration.sh'
