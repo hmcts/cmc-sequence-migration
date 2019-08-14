@@ -97,8 +97,7 @@ try {
                           ${CLAIM_STORE_DB_PORT} \
                           ${CLAIM_STORE_DB_USERNAME} \
                           ${CLAIM_STORE_DB_PASSWORD} \
-                          ${CLAIM_STORE_DB_NAME} \
-                          ${params.REFERENCE_NUMBER_TYPE}'
+                          ${CLAIM_STORE_DB_NAME}'
                }
            }
         }
