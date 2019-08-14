@@ -87,14 +87,12 @@ try {
         env.CMC_DB_PORT = '5432'
         env.CMC_DB_NAME = 'cmc'
 
-        def referenceNumberType = params.REFERENCE_NUMBER_TYPE
-
         // run migration scripts in postgres container
         stage('Run migration scripts') {
             withSubscription(subscription) {
                 withTeamSecrets(config, params.ENVIRONMENT) {
                       sh 'chmod +x ${WORKSPACE}/migration.sh'
-                      sh '${WORKSPACE}/migration.sh \
+                      sh "${WORKSPACE}/migration.sh \
                           ${CLAIM_STORE_DB_HOST} \
                           ${CLAIM_STORE_DB_PORT} \
                           ${CLAIM_STORE_DB_USERNAME} \
@@ -105,7 +103,7 @@ try {
                           ${CMC_DB_PORT} \
                           ${CMC_DB_USERNAME} \
                           ${CMC_DB_PASSWORD} \
-                          ${CMC_DB_NAME}'
+                          ${CMC_DB_NAME}"
                }
            }
         }
