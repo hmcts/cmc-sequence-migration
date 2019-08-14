@@ -93,7 +93,11 @@ try {
                 withTeamSecrets(config, params.ENVIRONMENT) {
                       sh "chmod +x ${WORKSPACE}/migration.sh"
                       sh "${WORKSPACE}/migration.sh \
-                          ${CLAIM_STORE_DB_HOST}"
+                          ${CLAIM_STORE_DB_HOST} \
+                          ${CLAIM_STORE_DB_PORT} \
+                          ${CLAIM_STORE_DB_USERNAME} \
+                          ${CLAIM_STORE_DB_PASSWORD} \
+                          ${CLAIM_STORE_DB_NAME}"
                }
            }
         }
