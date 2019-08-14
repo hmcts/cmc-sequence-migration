@@ -89,6 +89,7 @@ try {
 
         // run migration scripts in postgres container
         stage('Run migration scripts') {
+        def ref = "karim"
             withSubscription(subscription) {
                 withTeamSecrets(config, params.ENVIRONMENT) {
                       sh 'chmod +x ${WORKSPACE}/migration.sh'
@@ -98,7 +99,7 @@ try {
                           ${CLAIM_STORE_DB_USERNAME} \
                           ${CLAIM_STORE_DB_PASSWORD} \
                           ${CLAIM_STORE_DB_NAME} \
-                          ${params.REFERENCE_NUMBER_TYPE} \
+                          ${ref} \
                           ${CMC_DB_HOST} \
                           ${CMC_DB_PORT} \
                           ${CMC_DB_USERNAME} \
