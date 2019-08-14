@@ -91,7 +91,7 @@ try {
         stage('Run migration scripts') {
             withSubscription(subscription) {
                 withTeamSecrets(config, params.ENVIRONMENT) {
-                    steps {
+                    step {
                       sh "chmod +x ${WORKSPACE}/migration.sh"
                       sh "${WORKSPACE}/migration.sh \
                           ${CLAIM_STORE_DB_HOST} \
