@@ -93,9 +93,17 @@ try {
                 withTeamSecrets(config, params.ENVIRONMENT) {
                         sh "chmod +x ${WORKSPACE}/migration.sh"
                         sh "${WORKSPACE}/migration.sh \
-                        '51.140.184.11' \
-                        '5432'
-                        "
+                        ${CLAIM_STORE_DB_HOST} \
+                        ${CLAIM_STORE_DB_PORT} \
+                        ${CLAIM_STORE_DB_USERNAME} \
+                        ${CLAIM_STORE_DB_PASSWORD} \
+                        ${CLAIM_STORE_DB_NAME} \
+                        ${params.REFERENCE_NUMBER_TYPE} \
+                        ${CMC_DB_HOST} \
+                        ${CMC_DB_PORT} \
+                        ${CMC_DB_USERNAME} \
+                        ${CMC_DB_PASSWORD} \
+                        ${CMC_DB_NAME}"
                }
            }
         }
