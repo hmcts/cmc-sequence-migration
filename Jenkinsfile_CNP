@@ -6,7 +6,7 @@ properties([
         parameters([
                 choice(name: 'ENVIRONMENT', choices: 'sandbox\npreview\ndemo\nithc\naat\nprod', description: 'Environment where migration should be run'),
                 choice(name: 'SUBSCRIPTION', choices: 'sandbox\nqa\nnonprod\nprod', description: 'Azure subscriptions available to build in'),
-                choice(name: 'REFERENCE_NUMBER_TYPE', choices: 'claim\nlegal', description: 'The Type of Reference Number')
+                choice(name: 'REFERENCENUMBERTYPE', choices: 'claim\nlegal', description: 'The Type of Reference Number')
         ])
 ])
 
@@ -98,7 +98,7 @@ try {
                           ${CLAIM_STORE_DB_USERNAME} \
                           ${CLAIM_STORE_DB_PASSWORD} \
                           ${CLAIM_STORE_DB_NAME} \
-                          "${params.REFERENCE_NUMBER_TYPE}" \
+                          ${params.REFERENCENUMBERTYPE} \
                           ${CMC_DB_HOST} \
                           ${CMC_DB_PORT} \
                           ${CMC_DB_USERNAME} \
