@@ -61,6 +61,15 @@ LAST_VAL=$(psql "${OLD_CONN_STR}" \
 
 echo "LAST SEQUENCE VALUE FROM OLD DB: $LAST_VAL"
 
+SEQ_VAL_BEFORE_UPDATE=$(psql "${NEW_CONN_STR}" \
+    -t \
+    -c "${LAST_VAL_SQL}" \
+    --set ON_ERROR_ROLLBACK=on \
+    --set ON_ERROR_STOP=off
+    )
+
+echo "SEQUENCE VALUE IN NEW DB BEFORE UPDATE: $SEQ_VAL_BEFORE_UPDATE"
+
 UPDATE_VAL_SQL="SELECT setval('claim_reference_number_seq', $LAST_VAL)"
 UPDATE_LEGAL_SQL="SELECT setval('claim_legal_rep_reference_number_seq', $LAST_VAL)"
 
@@ -76,6 +85,15 @@ UPDATE_NEW_DB=$(psql "${NEW_CONN_STR}" \
     )
 
 echo "UPDATE SEQUENCE VALUE ON NEW DB: $UPDATE_NEW_DB"
+
+SEQ_VAL_AFTER_UPDATE=$(psql "${NEW_CONN_STR}" \
+    -t \
+    -c "${LAST_VAL_SQL}" \
+    --set ON_ERROR_ROLLBACK=on \
+    --set ON_ERROR_STOP=off
+    )
+
+echo "SEQUENCE VALUE IN NEW DB AFTER UPDATE: $SEQ_VAL_AFTER_UPDATE"
 
 echo "* Migration finished"
 echo
