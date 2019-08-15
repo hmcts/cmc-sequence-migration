@@ -83,11 +83,13 @@ try {
         env.CMC_DB_NAME = 'cmc'
 
         // run migration scripts in postgres container
+        // run migration scripts in postgres container
         stage('Run migration scripts') {
             withSubscription(subscription) {
                 withTeamSecrets(config, params.ENVIRONMENT) {
-                      sh "chmod +x ${WORKSPACE}/migration.sh"
-                      sh "${WORKSPACE}/migration.sh \
+                    withDocker('jbergknoff/postgresql-client', "--entrypoint='' -e PGPASSWORD=${CMC_DB_PASSWORD} -v ${WORKSPACE}") {
+                        sh "chmod +x migration.sh"
+                        sh "migration.sh \
                           ${CLAIM_STORE_DB_HOST} \
                           ${CLAIM_STORE_DB_PORT} \
                           ${CLAIM_STORE_DB_USERNAME} \
@@ -99,8 +101,9 @@ try {
                           ${CMC_DB_USERNAME} \
                           ${CMC_DB_PASSWORD} \
                           ${CMC_DB_NAME}"
-               }
-           }
+                    }
+                }
+            }
         }
 
         stage('Clean up') {
