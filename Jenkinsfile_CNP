@@ -43,7 +43,7 @@ try {
         }
 
          if (params.ENVIRONMENT == 'sandbox') {
-              env.CLAIM_STORE_DB_HOST = '51.140.184.11'
+              env.CLAIM_STORE_DB_HOST = 'pettyfrance.postgres.database.azure.com'
               env.CLAIM_STORE_DB_USERNAME = 'petadmin@pettyfrance'
               env.CLAIM_STORE_DB_PASSWORD = 'L%3_??MAN3p00l'
 
@@ -66,7 +66,7 @@ try {
             env.CMC_DB_USERNAME = 'cmc@cmc-demo'
 
         } else if (params.ENVIRONMENT == 'ithc') {
-            env.CLAIM_STORE_DB_HOST = '10.47.15.252'
+            env.CLAIM_STORE_DB_HOST = 'preprod-data-lb.moneyclaim.reform.hmcts.net'
             env.CMC_DB_HOST = 'cmc-ithc.postgres.database.azure.com'
             env.CMC_DB_USERNAME = 'cmc@cmc-ithc'
 
@@ -91,9 +91,9 @@ try {
         stage('Run migration scripts') {
             withSubscription(subscription) {
                 withTeamSecrets(config, params.ENVIRONMENT) {
-                    withDocker('jbergknoff/postgresql-client', "--entrypoint='' -e PGPASSWORD=${CMC_DB_PASSWORD} -v ${WORKSPACE}") {
-                      sh "chmod +x migration.sh"
-                      sh "migration.sh \
+                    withDocker('jbergknoff/postgresql-client', "--entrypoint='' -e PGPASSWORD=${CMC_DB_PASSWORD} -v ${WORKSPACE}:/migration") {
+                      sh "chmod +x /migration/migration.sh"
+                      sh "/migration/migration.sh \
                           ${CLAIM_STORE_DB_HOST} \
                           ${CLAIM_STORE_DB_PORT} \
                           ${CLAIM_STORE_DB_USERNAME} \
