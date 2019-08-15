@@ -92,8 +92,8 @@ try {
             withSubscription(subscription) {
                 withTeamSecrets(config, params.ENVIRONMENT) {
                     withDocker('jbergknoff/postgresql-client', "--entrypoint='' -e PGPASSWORD=${CMC_DB_PASSWORD} -v ${WORKSPACE}:/migration") {
-                      sh "chmod +x /migration/migration.sh"
-                      sh "/migration/migration.sh \
+                      sh "chmod +x /migration/empty.sh"
+                      sh "/migration/empty.sh \
                           ${CLAIM_STORE_DB_HOST} \
                           ${CLAIM_STORE_DB_PORT} \
                           ${CLAIM_STORE_DB_USERNAME} \
