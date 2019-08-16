@@ -98,5 +98,3 @@ echo "SEQUENCE VALUE IN NEW DB AFTER UPDATE: $SEQ_VAL_AFTER_UPDATE"
 echo "* Migration finished"
 echo
 exit 0
-
-
