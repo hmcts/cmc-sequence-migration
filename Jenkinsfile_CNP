@@ -92,9 +92,7 @@ try {
             withSubscription(subscription) {
                 withTeamSecrets(config, params.ENVIRONMENT) {
                     withDocker('jbergknoff/postgresql-client', "--entrypoint='' -e PGPASSWORD=${CMC_DB_PASSWORD} -v ${WORKSPACE}:/migration") {
-                      sh "pwd && ls -lrt"
-                      sh "chmod +x /migration/empty.sh"
-                      sh "pwd && ls -lrt && /migration/empty.sh"
+                      sh "echo 'hello world'"
                     }
                }
            }
