@@ -1,8 +1,9 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 echo
 set -e
 set -u
+
 echo "* Starting migration..."
 echo
 
