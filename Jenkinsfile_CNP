@@ -95,6 +95,7 @@ try {
                       sh "echo 'hello world'"
                       sh "pwd && ls -lart"
                       sh "cat empty.sh"
+                      sh "empty.sh"
                     }
                }
            }
