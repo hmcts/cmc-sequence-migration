@@ -103,7 +103,7 @@ try {
                          ${CMC_DB_HOST} \
                          ${CMC_DB_PORT} \
                          ${CMC_DB_USERNAME} \
-                         ${CMC_DB_PASSWORD}"
+                         ${PGPASSWORD}"
                     }
                }
            }
