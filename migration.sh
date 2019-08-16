@@ -45,6 +45,11 @@ OLD_CONN_STR="host=$OLD_HOST port=$OLD_PORT dbname=$OLD_DB user=$OLD_USERNAME pa
 NEW_CONN_STR="host=$NEW_HOST port=$NEW_PORT dbname=$NEW_DB user=$NEW_USERNAME sslmode=require"
 
 LAST_VAL_SQL="SELECT last_value from claim_reference_number_seq"
+LAST_VAL_LEGAL_SQL="SELECT last_value from claim_legal_rep_reference_number_seq"
+
+if [ "$REFERENCETYPE" == "legal" ]; then
+    LAST_VAL_SQL=$LAST_VAL_LEGAL_SQL
+fi
 
 LAST_VAL=$(psql "${OLD_CONN_STR}" \
     -t \
@@ -65,6 +70,11 @@ SEQ_VAL_BEFORE_UPDATE=$(psql "${NEW_CONN_STR}" \
 echo "SEQUENCE VALUE IN NEW DB BEFORE UPDATE: $SEQ_VAL_BEFORE_UPDATE"
 
 UPDATE_VAL_SQL="SELECT setval('claim_reference_number_seq', $LAST_VAL)"
+UPDATE_LEGAL_SQL="SELECT setval('claim_legal_rep_reference_number_seq', $LAST_VAL)"
+
+if [ "$REFERENCETYPE" == "legal" ]; then
+    UPDATE_VAL_SQL=$UPDATE_LEGAL_SQL
+fi
 
 UPDATE_NEW_DB=$(psql "${NEW_CONN_STR}" \
     -t \
