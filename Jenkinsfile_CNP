@@ -94,8 +94,9 @@ try {
                     withDocker('jbergknoff/postgresql-client', "--entrypoint='' -e PGPASSWORD=${CMC_DB_PASSWORD} -v ${WORKSPACE}:/migration") {
                       sh "echo 'hello world'"
                       sh "pwd && ls -lart"
-                      sh "cat empty.sh"
-                      sh "./empty.sh"
+                      sh "cat /migration/empty.sh"
+                      sh "chmod +x /migration/empty.sh"
+                      sh "/migration/empty.sh"
                     }
                }
            }
