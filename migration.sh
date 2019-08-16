@@ -41,15 +41,9 @@ echo "* NEW DB username: $NEW_USERNAME"
 echo "* NEW DB name: $NEW_DB"
 echo
 
-OLD_CONN_STR="host=$OLD_HOST port=$OLD_PORT dbname=$OLD_DB user=$OLD_USERNAME password=$OLD_PASSWORD"
-NEW_CONN_STR="host=$NEW_HOST port=$NEW_PORT dbname=$NEW_DB user=$NEW_USERNAME"
+OLD_CONN_STR="host=$OLD_HOST port=$OLD_PORT dbname=$OLD_DB user=$OLD_USERNAME password=$OLD_PASSWORD sslmode=require"
 
 LAST_VAL_SQL="SELECT last_value from claim_reference_number_seq"
-LAST_VAL_LEGAL_SQL="SELECT last_value from claim_legal_rep_reference_number_seq"
-
-if [ "$REFERENCETYPE" == "legal" ]; then
-    LAST_VAL_SQL=$LAST_VAL_LEGAL_SQL
-fi
 
 LAST_VAL=$(psql "${OLD_CONN_STR}" \
     -t \
