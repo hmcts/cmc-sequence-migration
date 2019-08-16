@@ -4,4 +4,4 @@ echo
 set -e
 set -u
 
-echo "Blablabla..."
+echo "* Starting migration..."
