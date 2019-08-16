@@ -91,9 +91,8 @@ try {
         stage('Run migration scripts') {
             withSubscription(subscription) {
                 withTeamSecrets(config, params.ENVIRONMENT) {
-                    withDocker('jbergknoff/postgresql-client', "--entrypoint='' -e PGPASSWORD=${CMC_DB_PASSWORD} -v ${WORKSPACE}:/migration") {
+                    withDocker('jbergknoff/postgresql-client', "--entrypoint='' -e PGPASSWORD=${CMC_DB_PASSWORD}") {
                       sh "pwd && ls -lrt"
-                      sh "cd /migration"
                       sh "pwd && ls -lrt && ./empty.sh"
                     }
                }
