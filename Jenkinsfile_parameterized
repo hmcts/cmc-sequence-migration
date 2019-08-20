@@ -88,7 +88,6 @@ try {
         env.CMC_DB_NAME = 'cmc'
 
         // run migration scripts in postgres container
-/*
         stage('Run migration scripts') {
             withSubscription(subscription) {
                 withTeamSecrets(config, params.ENVIRONMENT) {
@@ -109,9 +108,9 @@ try {
                }
            }
         }
-*/
+
         // rollback DB changes
-        stage('Run rollback scripts') {
+/*        stage('Run rollback scripts') {
             withSubscription(subscription) {
                 withTeamSecrets(config, params.ENVIRONMENT) {
                     withDocker('jbergknoff/postgresql-client', "--entrypoint='' -e PGPASSWORD=${CMC_DB_PASSWORD} -v ${WORKSPACE}:/migration") {
@@ -125,7 +124,7 @@ try {
                     }
                 }
             }
-        }
+        }*/
 
         stage('Clean up') {
             deleteDir()
