@@ -6,7 +6,7 @@ properties([
         parameters([
                 choice(name: 'ENVIRONMENT', choices: 'sandbox', description: 'Environment where migration should be run'),
                 choice(name: 'SUBSCRIPTION', choices: 'sandbox', description: 'Azure subscriptions available to build in'),
-                choice(name: 'REFERENCE_NUMBER_TYPE', choices: 'claim\nlegal', description: 'The Type of Reference Number')
+                choice(name: 'REFERENCE_NUMBER_TYPE', choices: 'citizen\nlegal', description: 'The Type of Reference Number')
         ])
 ])
 
