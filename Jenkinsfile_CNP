@@ -109,6 +109,24 @@ try {
            }
         }
 
+/*
+        // rollback DB changes
+        stage('Run rollback scripts') {
+            withSubscription(subscription) {
+                withTeamSecrets(config, params.ENVIRONMENT) {
+                    withDocker('jbergknoff/postgresql-client', "--entrypoint='' -e PGPASSWORD=${CMC_DB_PASSWORD} -v ${WORKSPACE}:/migration") {
+                        sh "chmod +x /migration/rollback.sh"
+                        sh "/migration/rollback.sh \
+                         ${CMC_DB_HOST} \
+                         ${CMC_DB_PORT} \
+                         ${CMC_DB_USERNAME} \
+                         ${CMC_DB_NAME} \
+                         ${params.REFERENCE_NUMBER_TYPE}"
+                    }
+                }
+            }
+        }
+*/
         stage('Clean up') {
             deleteDir()
         }
