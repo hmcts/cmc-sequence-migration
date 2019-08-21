@@ -7,7 +7,7 @@ properties([
                 choice(name: 'ENVIRONMENT', choices: 'sandbox', description: 'Environment where migration should be run'),
                 choice(name: 'SUBSCRIPTION', choices: 'sandbox', description: 'Azure subscriptions available to build in'),
                 choice(name: 'REFERENCE_NUMBER_TYPE', choices: 'citizen\nlegal', description: 'The Type of Reference Number'),
-                choice(name: 'SCRYPT_TYPE', choices: 'migration\nrollback', description: 'The Type of script to run. Default is Migration ')
+                choice(name: 'SCRIPT_TYPE', choices: 'migration\nrollback', description: 'The Type of script to run. Default is Migration ')
         ])
 ])
 
@@ -88,7 +88,7 @@ try {
         env.CMC_DB_PORT = '5432'
         env.CMC_DB_NAME = 'cmc'
 
-        if (params.SCRYPT_TYPE == 'rollback') {
+        if (params.SCRIPT_TYPE == 'rollback') {
             // rollback DB changes
             stage('Run rollback scripts') {
                 withSubscription(subscription) {

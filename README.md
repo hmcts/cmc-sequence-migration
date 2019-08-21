@@ -1,4 +1,4 @@
-# citizen and Legal sequence number migration
+# Citizen and Legal sequence number migration
 
 Citizen and Legal Sequence Number migration to PAAS
 
