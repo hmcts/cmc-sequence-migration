@@ -73,9 +73,9 @@ try {
 
         } else {
 
-            env.CLAIM_STORE_DB_HOST = ''
-            env.CMC_DB_HOST = ''
-            env.CMC_DB_USERNAME = ''
+            env.CLAIM_STORE_DB_HOST = 'prod-data-lb.moneyclaim.reform.hmcts.net'
+            env.CMC_DB_HOST = 'cmc-prod.postgres.database.azure.com'
+            env.CMC_DB_USERNAME = 'cmc@cmc-prod'
         }
 
         env.CLAIM_STORE_DB_PORT = '5432'
