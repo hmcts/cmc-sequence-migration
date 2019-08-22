@@ -71,7 +71,7 @@ try {
             env.CMC_DB_HOST = 'cmc-ithc.postgres.database.azure.com'
             env.CMC_DB_USERNAME = 'cmc@cmc-ithc'
 
-        } else {
+        } else if (params.ENVIRONMENT == 'prod') {
 
             env.CLAIM_STORE_DB_HOST = 'prod-data-lb.moneyclaim.reform.hmcts.net'
             env.CMC_DB_HOST = 'cmc-prod.postgres.database.azure.com'
